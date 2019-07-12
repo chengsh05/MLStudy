@@ -19,16 +19,16 @@ $$ H(x) = - \int_x P(x)\log (P(x))dx $$
 import numpy as np
 def ComputerEntropy(x, p_x):
       if(isinstance(p_x, float)):
-            E = -p_x * np.log2(p_x)
-            return x, E
+            H_x = -p_x * np.log2(p_x)
+            return x, H_x
 #Test Case
-x1, E1 = ComputerEntropy("532", 0.5)
-x2, E2 = ComputerEntropy("531", 0.2)
-x3, E3 = ComputerEntropy("530", 0.3)
-print(x1, E1)
-print(x2, E2)
-print(x3, E3)
-print("All H(x):", E1 + E2 + E3)
+x1, H_x1 = ComputerEntropy("532", 0.5)
+x2, H_x2 = ComputerEntropy("531", 0.2)
+x3, H_x3 = ComputerEntropy("530", 0.3)
+print(x1, H_x1)
+print(x2, H_x2)
+print(x3, H_x3)
+print("All H(x):", H_x1 + H_x2 + H_x3)
 ```
 
 ## 概率分布的基本概念
@@ -45,9 +45,28 @@ print("All H(x):", E1 + E2 + E3)
  概率密度函数的积分，能完整描述一个实随机变量X的概率分布。
 
 #### 期望:
+数学期望是随机变量的重要特征之一,随机变量X的数学期望记为E(X),E(X)是X的算术平均的近似值,数学期望表示了X的平均值大小。
+- 当X为离散型随机变量时,并且其概率分布函数为\(P(X = x_k) = P_k\), 其中k = 1,2,...,n;则数学期望为:
+  $$ E(x) = \sum_{k=1}^n x_k p_k $$
+- 当X为连续型随机变量时,设其概率密度为f(x),则数学期望为
+  $$E(x)= \int_{-\infty}^{+\infty}xf(x)dx$$
 #### 方差:
-#### 标准差:
+数学期望给出了随机变量的平均大小,现实生活中我们还经常关心随机变量的取值在均值周围的散布程度,而方差就是这样的一个数字特征
+设X是随机变量,并且\(E{[X-E(x)^2]}\)存在,则称它为X的方差,记为D(X)  
 
+- 当X为离散型时: 
+$$D(x) = \sum_k[x_k - E(X)]^2*P_k$$  
+- 当X为连续型时: 
+$$D(x) = \int_{-\infty}^{+\infty}[x_k - E(X)]^2*f(x)dx$$
+#### 标准差:
+- 方差的算术平方根\(\sigma(X) = \sqrt{D(x)} \)为X的标准差
+
+- 另外,\(D(x) = E{[(X-E(x))^2]}\) 经过化解可得
+  $$D(X) = E(X^2) – [E(X)]^2$$ 我们一般计算的时候常用这个式子。
+
+#### 协方差:
+
+#### 相关系数:
 #### 常见的概率分布:
 各自的函数表示方法, 信息熵的推导与计算, 期望与方差的计算.  
 ##### 离散型分布
@@ -61,3 +80,5 @@ print("All H(x):", E1 + E2 + E3)
 ###### 正态分布(高斯分布):
 ###### 指数分布:
 ###### 均匀分布:
+
+###### 贝叶斯公式与理解
